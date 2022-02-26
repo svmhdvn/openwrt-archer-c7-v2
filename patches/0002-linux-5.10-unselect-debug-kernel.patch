@@ -1,0 +1,43 @@
+From eb7a2205bb4c20c66a2c60e54f807526e35079f0 Mon Sep 17 00:00:00 2001
+From: Siva Mahadevan <me@svmhdvn.name>
+Date: Sat, 26 Feb 2022 18:28:29 -0500
+Subject: [PATCH 02/12] linux-5.10: unselect debug kernel
+
+---
+ .../0002-siva-unselect-debug-kernel.patch     | 24 +++++++++++++++++++
+ 1 file changed, 24 insertions(+)
+ create mode 100644 target/linux/ath79/patches-5.10/0002-siva-unselect-debug-kernel.patch
+
+diff --git a/target/linux/ath79/patches-5.10/0002-siva-unselect-debug-kernel.patch b/target/linux/ath79/patches-5.10/0002-siva-unselect-debug-kernel.patch
+new file mode 100644
+index 0000000000..9eb02eddef
+--- /dev/null
++++ b/target/linux/ath79/patches-5.10/0002-siva-unselect-debug-kernel.patch
+@@ -0,0 +1,24 @@
++From 921d26bc550be4eabb372ed3a6ca77498a5317d9 Mon Sep 17 00:00:00 2001
++From: Siva Mahadevan <me@svmhdvn.name>
++Date: Sat, 26 Feb 2022 18:19:52 -0500
++Subject: [PATCH 2/2] unselect debug kernel
++
++---
++ init/Kconfig | 1 -
++ 1 file changed, 1 deletion(-)
++
++diff --git a/init/Kconfig b/init/Kconfig
++index 13685bffe..0a2796005 100644
++--- a/init/Kconfig
+++++ b/init/Kconfig
++@@ -1394,7 +1394,6 @@ config BPF
++ menuconfig EXPERT
++ 	bool "Configure standard kernel features (expert users)"
++ 	# Unhide debug options, to make the on-by-default options visible
++-	select DEBUG_KERNEL
++ 	help
++ 	  This option allows certain base kernel options and settings
++ 	  to be disabled or tweaked. This is for specialized
++-- 
++2.25.1
++
+-- 
+2.25.1
+

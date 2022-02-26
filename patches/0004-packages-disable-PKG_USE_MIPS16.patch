@@ -1,0 +1,25 @@
+From 5df0f06473ed6288c5913ba8638a86b33e73fb72 Mon Sep 17 00:00:00 2001
+From: Siva Mahadevan <me@svmhdvn.name>
+Date: Sat, 26 Feb 2022 18:29:38 -0500
+Subject: [PATCH 04/12] packages: disable PKG_USE_MIPS16
+
+---
+ include/package.mk | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/include/package.mk b/include/package.mk
+index 509ef61e08..bd9c032da8 100644
+--- a/include/package.mk
++++ b/include/package.mk
+@@ -11,7 +11,7 @@ include $(INCLUDE_DIR)/download.mk
+ PKG_BUILD_DIR ?= $(BUILD_DIR)/$(if $(BUILD_VARIANT),$(PKG_NAME)-$(BUILD_VARIANT)/)$(PKG_NAME)$(if $(PKG_VERSION),-$(PKG_VERSION))
+ PKG_INSTALL_DIR ?= $(PKG_BUILD_DIR)/ipkg-install
+ PKG_BUILD_PARALLEL ?=
+-PKG_USE_MIPS16 ?= 1
++PKG_USE_MIPS16 ?= 0
+ PKG_IREMAP ?= 1
+ PKG_SKIP_DOWNLOAD=$(USE_SOURCE_DIR)$(USE_GIT_TREE)$(USE_GIT_SRC_CHECKOUT)
+ 
+-- 
+2.25.1
+

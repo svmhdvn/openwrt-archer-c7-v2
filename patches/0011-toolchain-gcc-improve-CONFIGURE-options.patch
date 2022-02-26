@@ -1,0 +1,28 @@
+From 15e3923f3d22dc12d7381d660b78022d4c452855 Mon Sep 17 00:00:00 2001
+From: Siva Mahadevan <me@svmhdvn.name>
+Date: Sat, 26 Feb 2022 18:35:09 -0500
+Subject: [PATCH 11/12] toolchain/gcc: improve CONFIGURE options
+
+---
+ toolchain/gcc/final/Makefile | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
+
+diff --git a/toolchain/gcc/final/Makefile b/toolchain/gcc/final/Makefile
+index 0315b9d1f1..2355de4002 100644
+--- a/toolchain/gcc/final/Makefile
++++ b/toolchain/gcc/final/Makefile
+@@ -6,7 +6,10 @@ GCC_CONFIGURE += \
+ 	--with-headers=$(TOOLCHAIN_DIR)/include \
+ 	--enable-languages=$(TARGET_LANGUAGES) \
+ 	--enable-shared \
+-	--enable-threads \
++	--enable-threads=posix \
++	--enable-libstdcxx-threads \
++	--disable-nls \
++	--with-mips-plt \
+ 	--with-slibdir=$(TOOLCHAIN_DIR)/lib \
+ 	--enable-lto \
+ 	--with-libelf=$(TOPDIR)/staging_dir/host
+-- 
+2.25.1
+

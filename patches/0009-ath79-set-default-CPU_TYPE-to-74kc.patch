@@ -1,0 +1,25 @@
+From 4a205c22f996a01efd647d6e01f10a2a765533dc Mon Sep 17 00:00:00 2001
+From: Siva Mahadevan <me@svmhdvn.name>
+Date: Sat, 26 Feb 2022 18:33:53 -0500
+Subject: [PATCH 09/12] ath79: set default CPU_TYPE to 74kc
+
+---
+ target/linux/ath79/Makefile | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/target/linux/ath79/Makefile b/target/linux/ath79/Makefile
+index dd57d9fed9..e5506b9a9c 100644
+--- a/target/linux/ath79/Makefile
++++ b/target/linux/ath79/Makefile
+@@ -3,7 +3,7 @@ include $(TOPDIR)/rules.mk
+ ARCH:=mips
+ BOARD:=ath79
+ BOARDNAME:=Atheros ATH79
+-CPU_TYPE:=24kc
++CPU_TYPE:=74kc
+ SUBTARGETS:=generic mikrotik nand tiny
+ 
+ FEATURES:=ramdisk squashfs usbgadget
+-- 
+2.25.1
+
