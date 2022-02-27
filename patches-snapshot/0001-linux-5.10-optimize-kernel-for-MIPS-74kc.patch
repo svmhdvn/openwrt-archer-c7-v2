@@ -1,4 +1,4 @@
-From 77dfe2a7f8268e7f9936613e1ae77e7088f07e67 Mon Sep 17 00:00:00 2001
+From 56f2b2f6248bf0f5acd6dbb60db92211e5a24c73 Mon Sep 17 00:00:00 2001
 From: Siva Mahadevan <me@svmhdvn.name>
 Date: Sat, 26 Feb 2022 18:28:03 -0500
 Subject: [PATCH 01/12] linux-5.10: optimize kernel for MIPS 74kc
@@ -10,28 +10,28 @@ Subject: [PATCH 01/12] linux-5.10: optimize kernel for MIPS 74kc
 
 diff --git a/target/linux/ath79/patches-5.10/0001-siva-optimize-kernel-for-MIPS-74kc.patch b/target/linux/ath79/patches-5.10/0001-siva-optimize-kernel-for-MIPS-74kc.patch
 new file mode 100644
-index 0000000000..1a54724d1b
+index 0000000000..63af9dfb39
 --- /dev/null
 +++ b/target/linux/ath79/patches-5.10/0001-siva-optimize-kernel-for-MIPS-74kc.patch
 @@ -0,0 +1,25 @@
-+From ed60be8bda834940d96c8b3a7af5c71515284aa1 Mon Sep 17 00:00:00 2001
++From aa133c0d242bb4684f161b5422cc19fea786b75d Mon Sep 17 00:00:00 2001
 +From: Siva Mahadevan <me@svmhdvn.name>
-+Date: Sat, 26 Feb 2022 18:19:35 -0500
-+Subject: [PATCH 1/2] optimize kernel for MIPS 74kc
++Date: Sat, 26 Feb 2022 20:09:28 -0500
++Subject: [PATCH] linux-5.10: optimize kernel for MIPS 74kc
 +
 +---
 + arch/mips/Makefile | 2 +-
 + 1 file changed, 1 insertion(+), 1 deletion(-)
 +
 +diff --git a/arch/mips/Makefile b/arch/mips/Makefile
-+index acab8018a..0720f3f5c 100644
++index 5c09e1a1e..72aca3410 100644
 +--- a/arch/mips/Makefile
 ++++ b/arch/mips/Makefile
-+@@ -164,7 +164,7 @@ cflags-$(CONFIG_CPU_VR41XX)	+= -march=r4100 -Wa,--trap
++@@ -174,7 +174,7 @@ cflags-$(CONFIG_CPU_VR41XX)	+= -march=r4100 -Wa,--trap
 + cflags-$(CONFIG_CPU_R4X00)	+= -march=r4600 -Wa,--trap
 + cflags-$(CONFIG_CPU_TX49XX)	+= -march=r4600 -Wa,--trap
 + cflags-$(CONFIG_CPU_MIPS32_R1)	+= -march=mips32 -Wa,--trap
-+-cflags-$(CONFIG_CPU_MIPS32_R2)	+= -march=mips32r2 -Wa,--trap
++-cflags-$(CONFIG_CPU_MIPS32_R2)	+= -march=mips32r2 -mtune=34kc -Wa,--trap
 ++cflags-$(CONFIG_CPU_MIPS32_R2)	+= -march=74kc -mtune=74kc -mno-mips16 -mabi=32 -msym32 -mno-interlink-compressed -mno-branch-likely -fno-caller-saves -fomit-frame-pointer -Wa,-march=74kc,-mtune=74kc,-mno-mips16,-mabi=32,-msym32,--trap
 + cflags-$(CONFIG_CPU_MIPS32_R5)	+= -march=mips32r5 -Wa,--trap -modd-spreg
 + cflags-$(CONFIG_CPU_MIPS32_R6)	+= -march=mips32r6 -Wa,--trap -modd-spreg

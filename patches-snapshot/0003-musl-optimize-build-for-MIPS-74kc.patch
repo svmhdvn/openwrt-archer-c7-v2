@@ -1,4 +1,4 @@
-From 373c9213927e14e9e9156b92b926185b72768205 Mon Sep 17 00:00:00 2001
+From 91e4086fde65bbd0eaf943af6029ee230b1bacff Mon Sep 17 00:00:00 2001
 From: Siva Mahadevan <me@svmhdvn.name>
 Date: Sat, 26 Feb 2022 18:28:49 -0500
 Subject: [PATCH 03/12] musl: optimize build for MIPS 74kc
