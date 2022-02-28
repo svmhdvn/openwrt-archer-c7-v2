@@ -1,7 +1,7 @@
-From 6c34b78a817bd87a2c01be2f5050a39a14a43e93 Mon Sep 17 00:00:00 2001
+From 168cc3f1243ebeda0a33779e7e3607d03b926412 Mon Sep 17 00:00:00 2001
 From: Siva Mahadevan <me@svmhdvn.name>
-Date: Sat, 26 Feb 2022 23:42:30 -0500
-Subject: [PATCH 12/12] config-5.4: change ath79-specific kernel options
+Date: Sun, 27 Feb 2022 17:06:32 -0500
+Subject: [PATCH 1/2] config-5.4: modify ath79-specific config options
 
 ---
  target/linux/ath79/config-5.4 | 4 ++--

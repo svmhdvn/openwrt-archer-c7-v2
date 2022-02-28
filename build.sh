@@ -4,6 +4,10 @@ set -e -x
 
 openwrt_url='https://git.openwrt.org/openwrt/openwrt.git'
 openwrt_tag='v21.02.2'
+
+# TODO parse this from within openwrt itself
+kernel_version='5.4.179'
+
 cpus=$(nproc)
 top="$PWD"
 
@@ -22,5 +26,10 @@ git am $top/patches/*.patch
 ./scripts/feeds update -a
 ./scripts/feeds install -a
 make menuconfig
+make kernel_menuconfig CONFIG_TARGET=subtarget
+
+# set all kernel modules to be built-in
+sed -i -e "s/=m/=y/g" "build_dir/target-mips_74kc_musl/linux-ath79_generic/linux-$kernel_version/.config"
+
 make download -j"$cpus"
 make -j"$cpus"

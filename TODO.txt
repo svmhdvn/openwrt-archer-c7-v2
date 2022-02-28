@@ -1,3 +1,4 @@
+* FIXME move ath79-specific kernel options into the config-default section
 * use "Configure using config diff file" from https://openwrt.org/docs/guide-developer/toolchain/use-buildsystem
 * add luci-app-sqm to default package list (make menuconfig, select y)
 * improve and cleanup build script
