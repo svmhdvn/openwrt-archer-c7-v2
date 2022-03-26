@@ -1,0 +1,54 @@
+From 65e19f2063379c69c782e6e06fd9cb6d319175a2 Mon Sep 17 00:00:00 2001
+From: Siva Mahadevan <me@svmhdvn.name>
+Date: Sun, 6 Mar 2022 14:08:37 -0500
+Subject: [PATCH] ag71xx: DMA unmap FROM_DEVICE no-op for archer c7 v2
+
+---
+ .../drivers/net/ethernet/atheros/ag71xx/ag71xx_main.c  | 10 +---------
+ 1 file changed, 1 insertion(+), 9 deletions(-)
+
+diff --git a/target/linux/ath79/files/drivers/net/ethernet/atheros/ag71xx/ag71xx_main.c b/target/linux/ath79/files/drivers/net/ethernet/atheros/ag71xx/ag71xx_main.c
+index 84b0f9e4ac..73f9875e87 100644
+--- a/target/linux/ath79/files/drivers/net/ethernet/atheros/ag71xx/ag71xx_main.c
++++ b/target/linux/ath79/files/drivers/net/ethernet/atheros/ag71xx/ag71xx_main.c
+@@ -162,8 +162,6 @@ static void ag71xx_ring_rx_clean(struct ag71xx *ag)
+ 
+ 	for (i = 0; i < ring_size; i++)
+ 		if (ring->buf[i].rx_buf) {
+-			dma_unmap_single(&ag->pdev->dev, ring->buf[i].dma_addr,
+-					 ag->rx_buf_size, DMA_FROM_DEVICE);
+ 			skb_free_frag(ring->buf[i].rx_buf);
+ 		}
+ }
+@@ -1116,7 +1114,7 @@ static netdev_tx_t ag71xx_hard_start_xmit(struct sk_buff *skb,
+ 	/* setup descriptor fields */
+ 	n = ag71xx_fill_dma_desc(ring, (u32) dma_addr, skb->len & ag->desc_pktlen_mask);
+ 	if (n < 0)
+-		goto err_drop_unmap;
++		goto err_drop;
+ 
+ 	i = (ring->curr + n - 1) & ring_mask;
+ 	ring->buf[i].len = skb->len;
+@@ -1148,9 +1146,6 @@ static netdev_tx_t ag71xx_hard_start_xmit(struct sk_buff *skb,
+ 
+ 	return NETDEV_TX_OK;
+ 
+-err_drop_unmap:
+-	dma_unmap_single(&ag->pdev->dev, dma_addr, skb->len, DMA_TO_DEVICE);
+-
+ err_drop:
+ 	dev->stats.tx_dropped++;
+ 
+@@ -1346,9 +1341,6 @@ static int ag71xx_rx_packets(struct ag71xx *ag, int limit)
+ 		pktlen = desc->ctrl & pktlen_mask;
+ 		pktlen -= ETH_FCS_LEN;
+ 
+-		dma_unmap_single(&ag->pdev->dev, ring->buf[i].dma_addr,
+-				 ag->rx_buf_size, DMA_FROM_DEVICE);
+-
+ 		dev->stats.rx_packets++;
+ 		dev->stats.rx_bytes += pktlen;
+ 
+-- 
+2.25.1
+
