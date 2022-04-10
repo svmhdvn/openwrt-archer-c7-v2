@@ -21,15 +21,15 @@ git reset --hard "$openwrt_tag"
 # TODO we only need to pull if we are building origin/master
 # git pull
 
-make dirclean
+make -j"$cpus" dirclean
 git am $top/patches/*.patch
 ./scripts/feeds update -a
 ./scripts/feeds install -a
-make menuconfig
-make kernel_menuconfig CONFIG_TARGET=subtarget
+make -j"$cpus" menuconfig
+make -j"$cpus" kernel_menuconfig CONFIG_TARGET=subtarget
 
 # set all kernel modules to be built-in
 sed -i -e "s/=m/=y/g" "build_dir/target-mips_74kc_musl/linux-ath79_generic/linux-$kernel_version/.config"
 
-make download -j"$cpus"
+make -j"$cpus" download
 make -j"$cpus"

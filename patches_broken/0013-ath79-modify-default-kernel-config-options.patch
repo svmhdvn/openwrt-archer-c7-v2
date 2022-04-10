@@ -1,0 +1,46 @@
+From c055e13c9eeaf4292ceb332b2ffb0fffb655246f Mon Sep 17 00:00:00 2001
+From: Siva Mahadevan <me@svmhdvn.name>
+Date: Sun, 27 Feb 2022 16:52:09 -0500
+Subject: [PATCH] ath79: modify default kernel config options
+
+---
+ target/linux/ath79/generic/config-default | 6 ++++++
+ 1 file changed, 6 insertions(+)
+
+diff --git a/target/linux/ath79/generic/config-default b/target/linux/ath79/generic/config-default
+index d9a52af7a0..bdb3858cca 100644
+--- a/target/linux/ath79/generic/config-default
++++ b/target/linux/ath79/generic/config-default
+@@ -1,11 +1,15 @@
+ CONFIG_BCM_NET_PHYLIB=y
+ CONFIG_BROADCOM_PHY=y
++CONFIG_CRYPTO_LIB_POLY1305_RSIZE=2
+ CONFIG_GPIO_PCA953X=y
+ CONFIG_GPIO_PCA953X_IRQ=y
+ CONFIG_GPIO_WATCHDOG=y
+ CONFIG_GPIO_WATCHDOG_ARCH_INITCALL=y
++CONFIG_HZ=250
++CONFIG_HZ_250=y
+ CONFIG_I2C=y
+ CONFIG_I2C_ALGOBIT=y
++CONFIG_I2C_BOARDINFO=y
+ CONFIG_I2C_CHARDEV=y
+ CONFIG_I2C_GPIO=y
+ CONFIG_INTEL_XWAY_PHY=y
+@@ -13,11 +17,13 @@ CONFIG_IP17XX_PHY=y
+ CONFIG_LEDS_RESET=y
+ CONFIG_MARVELL_PHY=y
+ CONFIG_MICREL_PHY=y
++CONFIG_MIPS_CBPF_JIT=y
+ CONFIG_MTD_REDBOOT_DIRECTORY_BLOCK=-3
+ CONFIG_MTD_REDBOOT_PARTS=y
+ CONFIG_MTD_SPLIT_EVA_FW=y
+ CONFIG_PHY_AR7100_USB=y
+ CONFIG_PHY_AR7200_USB=y
++CONFIG_REGMAP_I2C=y
+ CONFIG_REGULATOR=y
+ CONFIG_REGULATOR_FIXED_VOLTAGE=y
+ CONFIG_RTL8366RB_PHY=y
+-- 
+2.25.1
+

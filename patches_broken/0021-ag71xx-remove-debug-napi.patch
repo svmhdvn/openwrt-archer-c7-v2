@@ -1,0 +1,52 @@
+From 1a508667706f4d72efc40f09a769bd88c951e882 Mon Sep 17 00:00:00 2001
+From: Siva Mahadevan <me@svmhdvn.name>
+Date: Sat, 26 Mar 2022 14:07:58 -0400
+Subject: [PATCH] ag71xx: remove debug napi
+
+---
+ .../drivers/net/ethernet/atheros/ag71xx/ag71xx_main.c     | 8 ++------
+ 1 file changed, 2 insertions(+), 6 deletions(-)
+
+diff --git a/target/linux/ath79/files/drivers/net/ethernet/atheros/ag71xx/ag71xx_main.c b/target/linux/ath79/files/drivers/net/ethernet/atheros/ag71xx/ag71xx_main.c
+index b559b502cf..f7357e51d2 100644
+--- a/target/linux/ath79/files/drivers/net/ethernet/atheros/ag71xx/ag71xx_main.c
++++ b/target/linux/ath79/files/drivers/net/ethernet/atheros/ag71xx/ag71xx_main.c
+@@ -1222,7 +1222,7 @@ static int ag71xx_tx_packets(struct ag71xx *ag, bool flush)
+ 
+ 	DBG("%s: processing TX ring\n", ag->dev->name);
+ 
+-	while (ring->dirty + n != ring->curr) {
++	while (ring->curr != ring->dirty + n) {
+ 		unsigned int i = (ring->dirty + n) & ring_mask;
+ 		struct ag71xx_desc *desc = ag71xx_ring_desc(ring, i);
+ 		struct sk_buff *skb = ring->buf[i].skb;
+@@ -1301,7 +1301,7 @@ static int ag71xx_rx_packets(struct ag71xx *ag, int limit)
+ 		if (ag71xx_desc_empty(desc))
+ 			break;
+ 
+-		if ((ring->dirty + ring_size) == ring->curr) {
++		if (ring->curr == (ring->dirty + ring_size)) {
+ 			ag71xx_assert(0);
+ 			break;
+ 		}
+@@ -1370,8 +1370,6 @@ static int ag71xx_poll(struct napi_struct *napi, int limit)
+ 	DBG("%s: processing RX ring\n", dev->name);
+ 	rx_done = ag71xx_rx_packets(ag, limit);
+ 
+-	ag71xx_debugfs_update_napi_stats(ag, rx_done, tx_done);
+-
+ 	if (rx_ring->buf[rx_ring->dirty % rx_ring_size].rx_buf == NULL)
+ 		goto oom;
+ 
+@@ -1447,8 +1445,6 @@ static irqreturn_t ag71xx_interrupt(int irq, void *dev_id)
+ 		napi_schedule(&ag->napi);
+ 	}
+ 
+-	ag71xx_debugfs_update_int_stats(ag, status);
+-
+ 	return IRQ_HANDLED;
+ }
+ 
+-- 
+2.25.1
+

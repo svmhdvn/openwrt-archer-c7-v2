@@ -1,0 +1,26 @@
+From 285b9a85ab70bed5156ce9b0c431bd41c8b75f56 Mon Sep 17 00:00:00 2001
+From: Siva Mahadevan <me@svmhdvn.name>
+Date: Sat, 26 Feb 2022 18:37:07 -0500
+Subject: [PATCH 09/12] toolchain/musl: improve CONFIGURE options
+
+---
+ toolchain/musl/common.mk | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/toolchain/musl/common.mk b/toolchain/musl/common.mk
+index 68098f5c6a..bb166a9e39 100644
+--- a/toolchain/musl/common.mk
++++ b/toolchain/musl/common.mk
+@@ -37,7 +37,8 @@ MUSL_CONFIGURE:= \
+ 		--host=$(GNU_HOST_NAME) \
+ 		--target=$(REAL_GNU_TARGET_NAME) \
+ 		--disable-gcc-wrapper \
+-		--enable-debug \
++		--disable-debug \
++		--enable-visibility \
+ 		--enable-optimize
+ 
+ define Host/Configure
+-- 
+2.25.1
+
