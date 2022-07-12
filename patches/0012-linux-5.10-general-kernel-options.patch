@@ -1,0 +1,97 @@
+From 06d90639b3cf929aa6fd84ebf09fde04b4842c7f Mon Sep 17 00:00:00 2001
+From: Siva Mahadevan <me@svmhdvn.name>
+Date: Tue, 12 Jul 2022 00:08:46 -0400
+Subject: [PATCH 2/2] linux-5.10: general kernel options
+
+---
+ target/linux/generic/config-5.10 | 18 +++++++++---------
+ 1 file changed, 9 insertions(+), 9 deletions(-)
+
+diff --git a/target/linux/generic/config-5.10 b/target/linux/generic/config-5.10
+index dac778e073..289f984edb 100644
+--- a/target/linux/generic/config-5.10
++++ b/target/linux/generic/config-5.10
+@@ -131,7 +131,7 @@ CONFIG_AEABI=y
+ # CONFIG_AHCI_MVEBU is not set
+ # CONFIG_AHCI_QORIQ is not set
+ # CONFIG_AHCI_XGENE is not set
+-CONFIG_AIO=y
++# CONFIG_AIO is not set
+ # CONFIG_AIRO is not set
+ # CONFIG_AIRO_CS is not set
+ # CONFIG_AIX_PARTITION is not set
+@@ -1280,7 +1280,7 @@ CONFIG_DEBUG_FS_ALLOW_ALL=y
+ # CONFIG_DEBUG_INFO_DWARF4 is not set
+ CONFIG_DEBUG_INFO_REDUCED=y
+ # CONFIG_DEBUG_INFO_SPLIT is not set
+-CONFIG_DEBUG_KERNEL=y
++# CONFIG_DEBUG_KERNEL is not set
+ # CONFIG_DEBUG_KMEMLEAK is not set
+ # CONFIG_DEBUG_KOBJECT is not set
+ # CONFIG_DEBUG_KOBJECT_RELEASE is not set
+@@ -2850,7 +2850,7 @@ CONFIG_JFFS2_SUMMARY=y
+ # CONFIG_JME is not set
+ CONFIG_JOLIET=y
+ # CONFIG_JSA1212 is not set
+-# CONFIG_JUMP_LABEL is not set
++CONFIG_JUMP_LABEL=y
+ # CONFIG_JZ4740_WDT is not set
+ # CONFIG_JZ4770_PHY is not set
+ # CONFIG_KALLSYMS is not set
+@@ -3136,7 +3136,7 @@ CONFIG_MAC80211_STA_HASH_MAX_SIZE=0
+ # CONFIG_MAC_PARTITION is not set
+ # CONFIG_MAG3110 is not set
+ # CONFIG_MAGIC_SYSRQ is not set
+-CONFIG_MAGIC_SYSRQ_DEFAULT_ENABLE=0x1
++CONFIG_MAGIC_SYSRQ_DEFAULT_ENABLE=0x0
+ # CONFIG_MAGIC_SYSRQ_SERIAL is not set
+ CONFIG_MAGIC_SYSRQ_SERIAL_SEQUENCE=""
+ # CONFIG_MAILBOX is not set
+@@ -4086,7 +4086,7 @@ CONFIG_NFS_V3=y
+ # CONFIG_NFT_TPROXY is not set
+ # CONFIG_NFT_TUNNEL is not set
+ # CONFIG_NFT_XFRM is not set
+-# CONFIG_NF_CONNTRACK is not set
++CONFIG_NF_CONNTRACK=y
+ # CONFIG_NF_CONNTRACK_AMANDA is not set
+ # CONFIG_NF_CONNTRACK_BRIDGE is not set
+ # CONFIG_NF_CONNTRACK_EVENTS is not set
+@@ -4114,7 +4114,7 @@ CONFIG_NF_CONNTRACK_PROCFS=y
+ # CONFIG_NF_CT_PROTO_GRE is not set
+ # CONFIG_NF_CT_PROTO_SCTP is not set
+ # CONFIG_NF_CT_PROTO_UDPLITE is not set
+-# CONFIG_NF_DEFRAG_IPV4 is not set
++CONFIG_NF_DEFRAG_IPV4=y
+ # CONFIG_NF_DUP_IPV4 is not set
+ # CONFIG_NF_DUP_IPV6 is not set
+ # CONFIG_NF_FLOW_TABLE is not set
+@@ -4122,7 +4122,7 @@ CONFIG_NF_CONNTRACK_PROCFS=y
+ # CONFIG_NF_LOG_BRIDGE is not set
+ # CONFIG_NF_LOG_IPV4 is not set
+ # CONFIG_NF_LOG_NETDEV is not set
+-# CONFIG_NF_NAT is not set
++CONFIG_NF_NAT=y
+ # CONFIG_NF_NAT_AMANDA is not set
+ # CONFIG_NF_NAT_FTP is not set
+ # CONFIG_NF_NAT_H323 is not set
+@@ -4708,7 +4708,7 @@ CONFIG_RCU_NEED_SEGCBLIST=y
+ CONFIG_RCU_STALL_COMMON=y
+ # CONFIG_RCU_STRICT_GRACE_PERIOD is not set
+ # CONFIG_RCU_TORTURE_TEST is not set
+-CONFIG_RCU_TORTURE_TEST_SLOW_INIT_DELAY=3
++# CONFIG_RCU_TORTURE_TEST_SLOW_INIT_DELAY is not set
+ # CONFIG_RCU_TRACE is not set
+ # CONFIG_RC_ATI_REMOTE is not set
+ # CONFIG_RC_CORE is not set
+@@ -7111,7 +7111,7 @@ CONFIG_WLAN=y
+ # CONFIG_WLAN_VENDOR_TI is not set
+ # CONFIG_WLAN_VENDOR_ZYDAS is not set
+ # CONFIG_WLCORE is not set
+-CONFIG_WQ_POWER_EFFICIENT_DEFAULT=y
++# CONFIG_WQ_POWER_EFFICIENT_DEFAULT is not set
+ # CONFIG_WQ_WATCHDOG is not set
+ # CONFIG_WW_MUTEX_SELFTEST is not set
+ # CONFIG_X25 is not set
+-- 
+2.25.1
+

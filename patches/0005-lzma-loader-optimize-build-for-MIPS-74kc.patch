@@ -22,7 +22,7 @@ index c7bb935a03..4be23f8416 100644
  		  -fno-common -ffreestanding -fhonour-copts -nostartfiles \
 -		  -mabi=32 -march=mips32r2 \
 -		  -Wa,-32 -Wa,-march=mips32r2 -Wa,-mips32r2 -Wa,--trap
-+		  -march=74kc -mtune=74kc -mno-mips16 -mabi=32 -msym32 -mno-interlink-compressed -mno-branch-likely -fno-caller-saves -Wa,-march=74kc,-mtune=74kc,-mno-mips16,-mabi=32,-msym32,--trap
++		  -march=74kc -mtune=74kc -mno-mips16 -mabi=32 -msym32 -mno-interlink-compressed -mno-branch-likely -mframe-header-opt -Wa,-march=74kc,-mtune=74kc,-mno-mips16,-mabi=32,-msym32,--trap
  CFLAGS		+= -D_LZMA_PROB32
  CFLAGS		+= -flto
  

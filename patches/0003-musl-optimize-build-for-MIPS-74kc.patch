@@ -32,7 +32,7 @@ index 0000000000..fb199acd8c
 + CPPFLAGS =
 + CFLAGS =
 +-CFLAGS_AUTO = -Os -pipe
-++CFLAGS_AUTO = -O2 -pipe -march=74kc -mtune=74kc -mno-mips16 -mabi=32 -msym32 -mno-interlink-compressed -mno-branch-likely -fno-caller-saves -fomit-frame-pointer -Wa,-march=74kc,-mtune=74kc,-mno-mips16,-mabi=32,-msym32
+++CFLAGS_AUTO = -O2 -pipe -march=74kc -mtune=74kc -mno-mips16 -mabi=32 -msym32 -mno-interlink-compressed -mno-branch-likely -mframe-header-opt -Wa,-march=74kc,-mtune=74kc,-mno-mips16,-mabi=32,-msym32
 + CFLAGS_C99FSE = -std=c99 -ffreestanding -nostdinc 
 + 
 + CFLAGS_ALL = $(CFLAGS_C99FSE)

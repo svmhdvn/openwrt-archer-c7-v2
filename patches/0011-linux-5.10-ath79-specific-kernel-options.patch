@@ -1,0 +1,25 @@
+From 957bed54f18828c9531328ac8e1ec457d54c6ae0 Mon Sep 17 00:00:00 2001
+From: Siva Mahadevan <me@svmhdvn.name>
+Date: Tue, 12 Jul 2022 00:08:24 -0400
+Subject: [PATCH 1/2] linux-5.10: ath79-specific kernel options
+
+---
+ target/linux/ath79/config-5.10 | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/target/linux/ath79/config-5.10 b/target/linux/ath79/config-5.10
+index 8c662173ef..6f53c75184 100644
+--- a/target/linux/ath79/config-5.10
++++ b/target/linux/ath79/config-5.10
+@@ -194,7 +194,7 @@ CONFIG_SYS_HAS_EARLY_PRINTK=y
+ CONFIG_SYS_SUPPORTS_32BIT_KERNEL=y
+ CONFIG_SYS_SUPPORTS_ARBIT_HZ=y
+ CONFIG_SYS_SUPPORTS_BIG_ENDIAN=y
+-CONFIG_SYS_SUPPORTS_MIPS16=y
++# CONFIG_SYS_SUPPORTS_MIPS16 is not set
+ CONFIG_SYS_SUPPORTS_ZBOOT=y
+ CONFIG_SYS_SUPPORTS_ZBOOT_UART_PROM=y
+ CONFIG_TARGET_ISA_REV=2
+-- 
+2.25.1
+

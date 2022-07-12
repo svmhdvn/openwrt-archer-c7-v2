@@ -1,14 +1,14 @@
-From 3ffe65c6e73bd39d30b9168eb02a4dd834a6a279 Mon Sep 17 00:00:00 2001
+From 746a06479e0a4e4fb236a6af23fb893f45a413e6 Mon Sep 17 00:00:00 2001
 From: Siva Mahadevan <me@svmhdvn.name>
-Date: Sat, 26 Feb 2022 23:36:46 -0500
-Subject: [PATCH 10/12] package: disable MIPS16
+Date: Fri, 22 Apr 2022 01:03:09 -0400
+Subject: [PATCH] package: disable MIPS16
 
 ---
  include/package.mk | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/include/package.mk b/include/package.mk
-index db0a869dab..b17bb01abb 100644
+index 509ef61e08..bd9c032da8 100644
 --- a/include/package.mk
 +++ b/include/package.mk
 @@ -11,7 +11,7 @@ include $(INCLUDE_DIR)/download.mk
@@ -18,8 +18,8 @@ index db0a869dab..b17bb01abb 100644
 -PKG_USE_MIPS16 ?= 1
 +PKG_USE_MIPS16 ?= 0
  PKG_IREMAP ?= 1
+ PKG_SKIP_DOWNLOAD=$(USE_SOURCE_DIR)$(USE_GIT_TREE)$(USE_GIT_SRC_CHECKOUT)
  
- MAKE_J:=$(if $(MAKE_JOBSERVER),$(MAKE_JOBSERVER) $(if $(filter 3.% 4.0 4.1,$(MAKE_VERSION)),-j))
 -- 
 2.25.1
 
