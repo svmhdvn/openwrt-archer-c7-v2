@@ -33,4 +33,5 @@ make -j"$cpus" kernel_menuconfig CONFIG_TARGET=subtarget
 sed -i -e "s/=m/=y/g" "build_dir/target-mips_74kc_musl/linux-ath79_generic/linux-$kernel_version/.config"
 
 make -j"$cpus"
-cp targets/ath79/generic/openwrt-ath79-generic-tplink_archer-c7-v2-squashfs-sysupgrade.bin "$top"
+cp bin/targets/ath79/generic/openwrt-ath79-generic-tplink_archer-c7-v2-squashfs-sysupgrade.bin "$top"
+cp bin/targets/ath79/generic/sha256sums "$top"
