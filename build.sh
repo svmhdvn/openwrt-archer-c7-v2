@@ -3,10 +3,11 @@
 set -e -x
 
 openwrt_url='https://git.openwrt.org/openwrt/openwrt.git'
-openwrt_tag='v22.03.0-rc5'
+openwrt_tag='v22.03.2'
+#openwrt_tag='origin/master'
 
 # TODO parse this from within openwrt itself
-kernel_version='5.10.127'
+kernel_version='5.10.146'
 
 cpus=$(nproc)
 top="$PWD"
@@ -19,7 +20,7 @@ cd "$top/openwrt"
 git reset --hard "$openwrt_tag"
 
 # TODO we only need to pull if we are building origin/master
-# git pull
+#git pull origin master
 
 #make dirclean
 git am $top/patches/*.patch
