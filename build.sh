@@ -3,11 +3,11 @@
 set -e -x
 
 openwrt_url='https://git.openwrt.org/openwrt/openwrt.git'
-openwrt_tag='v22.03.2'
+openwrt_tag='v22.03.3'
 #openwrt_tag='origin/master'
 
 # TODO parse this from within openwrt itself
-kernel_version='5.10.146'
+kernel_version='5.10.161'
 
 cpus=$(nproc)
 top="$PWD"
