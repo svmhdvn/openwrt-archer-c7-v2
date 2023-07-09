@@ -14,7 +14,7 @@ index 7526224972..ff2fbaf291 100644
 @@ -191,20 +191,20 @@ LINUX_RECONF_DIFF = $(SCRIPT_DIR)/kconfig.pl - '>' $(call __linux_confcmd,$(filt
  ifeq ($(DUMP),1)
    BuildTarget=$(BuildTargets/DumpCurrent)
- 
+
 -  CPU_CFLAGS = -Os -pipe
 +  CPU_CFLAGS = -O2 -pipe
    ifneq ($(findstring mips,$(ARCH)),)
@@ -30,20 +30,9 @@ index 7526224972..ff2fbaf291 100644
      CPU_CFLAGS_4kec = -mips32r2 -mtune=4kec
      CPU_CFLAGS_24kc = -mips32r2 -mtune=24kc
 -    CPU_CFLAGS_74kc = -mips32r2 -mtune=74kc
-+    CPU_CFLAGS_74kc = -march=74kc -mtune=74kc -mno-mips16 -mabi=32 -msym32 -mno-interlink-compressed -mframe-header-opt -Wa,-march=74kc,-mtune=74kc,-mno-mips16,-mabi=32,-msym32
++    CPU_CFLAGS_74kc = -march=74kc -mtune=74kc
      CPU_CFLAGS_octeonplus = -march=octeon+ -mabi=64
    endif
    ifeq ($(ARCH),i386)
-@@ -290,9 +290,6 @@ ifeq ($(DUMP),1)
-     ifneq ($(CONFIG_VIRTIO),)
-       FEATURES += virtio
-     endif
--    ifneq ($(CONFIG_CPU_MIPS32_R2),)
--      FEATURES += mips16
--    endif
-     FEATURES += $(foreach v,6 7,$(if $(CONFIG_CPU_V$(v)),arm_v$(v)))
- 
-     # remove duplicates
 -- 
 2.25.1
-

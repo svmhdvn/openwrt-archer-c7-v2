@@ -1,0 +1,25 @@
+From 998e37657c83c39f3e153785c482bd47f13b4582 Mon Sep 17 00:00:00 2001
+From: Siva Mahadevan <me@svmhdvn.name>
+Date: Sun, 9 Jul 2023 16:04:54 -0400
+Subject: [PATCH] linux-5.15: optimize kernel config
+
+---
+ target/linux/generic/config-5.15 | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/target/linux/generic/config-5.15 b/target/linux/generic/config-5.15
+index 2e9ad886..25579078 100644
+--- a/target/linux/generic/config-5.15
++++ b/target/linux/generic/config-5.15
+@@ -1320,7 +1320,7 @@ CONFIG_DEBUG_INFO_DWARF_TOOLCHAIN_DEFAULT=y
+ # CONFIG_DEBUG_INFO_REDUCED is not set
+ # CONFIG_DEBUG_INFO_SPLIT is not set
+ # CONFIG_DEBUG_IRQFLAGS is not set
+-CONFIG_DEBUG_KERNEL=y
++# CONFIG_DEBUG_KERNEL is not set
+ # CONFIG_DEBUG_KMAP_LOCAL is not set
+ # CONFIG_DEBUG_KMEMLEAK is not set
+ # CONFIG_DEBUG_KOBJECT is not set
+-- 
+2.41.0
+

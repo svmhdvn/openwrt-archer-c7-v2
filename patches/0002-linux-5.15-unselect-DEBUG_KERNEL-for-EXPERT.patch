@@ -1,0 +1,44 @@
+From 0b2439d3a2c67065ad737cf5a52a032222439c79 Mon Sep 17 00:00:00 2001
+From: Siva Mahadevan <me@svmhdvn.name>
+Date: Sun, 9 Jul 2023 19:01:53 -0400
+Subject: [PATCH] linux-5.15: unselect DEBUG_KERNEL for EXPERT
+
+---
+ ....15-unselect-DEBUG_KERNEL-for-EXPERT.patch | 25 +++++++++++++++++++
+ 1 file changed, 25 insertions(+)
+ create mode 100644 target/linux/ath79/patches-5.15/0002-siva-linux-5.15-unselect-DEBUG_KERNEL-for-EXPERT.patch
+
+diff --git a/target/linux/ath79/patches-5.15/0002-siva-linux-5.15-unselect-DEBUG_KERNEL-for-EXPERT.patch b/target/linux/ath79/patches-5.15/0002-siva-linux-5.15-unselect-DEBUG_KERNEL-for-EXPERT.patch
+new file mode 100644
+index 0000000..5d36bac
+--- /dev/null
++++ b/target/linux/ath79/patches-5.15/0002-siva-linux-5.15-unselect-DEBUG_KERNEL-for-EXPERT.patch
+@@ -0,0 +1,25 @@
++From ef7ee4460010fcc96c8ad295e6f95c42253296ab Mon Sep 17 00:00:00 2001
++From: Siva Mahadevan <me@svmhdvn.name>
++Date: Sun, 9 Jul 2023 19:00:01 -0400
++Subject: [PATCH] linux-5.15: unselect DEBUG_KERNEL for EXPERT
++
++---
++ init/Kconfig | 2 --
++ 1 file changed, 2 deletions(-)
++
++diff --git a/init/Kconfig b/init/Kconfig
++index dafc3ba6f..9ad934c5f 100644
++--- a/init/Kconfig
+++++ b/init/Kconfig
++@@ -1456,8 +1456,6 @@ config BPF
++ 
++ menuconfig EXPERT
++ 	bool "Configure standard kernel features (expert users)"
++-	# Unhide debug options, to make the on-by-default options visible
++-	select DEBUG_KERNEL
++ 	help
++ 	  This option allows certain base kernel options and settings
++ 	  to be disabled or tweaked. This is for specialized
++-- 
++2.41.0
++
+-- 
+2.41.0
+

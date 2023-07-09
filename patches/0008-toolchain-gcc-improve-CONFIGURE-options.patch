@@ -1,28 +1,25 @@
-From 527fc4588c020c61cbad7fcad060f76d887cfbc7 Mon Sep 17 00:00:00 2001
+From 1e7e0cd0acdd362ebd95ae965173d43c8b80e818 Mon Sep 17 00:00:00 2001
 From: Siva Mahadevan <me@svmhdvn.name>
-Date: Sat, 26 Feb 2022 18:35:09 -0500
-Subject: [PATCH 08/12] toolchain/gcc: improve CONFIGURE options
+Date: Sun, 9 Jul 2023 17:19:15 -0400
+Subject: [PATCH] toolchain/gcc: improve CONFIGURE options
 
 ---
- toolchain/gcc/final/Makefile | 5 ++++-
- 1 file changed, 4 insertions(+), 1 deletion(-)
+ toolchain/gcc/final/Makefile | 2 ++
+ 1 file changed, 2 insertions(+)
 
 diff --git a/toolchain/gcc/final/Makefile b/toolchain/gcc/final/Makefile
-index 0315b9d1f1..2355de4002 100644
+index 78a5576b..7fc95727 100644
 --- a/toolchain/gcc/final/Makefile
 +++ b/toolchain/gcc/final/Makefile
-@@ -6,7 +6,10 @@ GCC_CONFIGURE += \
- 	--with-headers=$(TOOLCHAIN_DIR)/include \
+@@ -7,6 +7,8 @@ GCC_CONFIGURE += \
  	--enable-languages=$(TARGET_LANGUAGES) \
  	--enable-shared \
--	--enable-threads \
-+	--enable-threads=posix \
-+	--enable-libstdcxx-threads \
-+	--disable-nls \
+ 	--enable-threads \
 +	--with-mips-plt \
++	--disable-nls \
  	--with-slibdir=$(TOOLCHAIN_DIR)/lib \
+ 	--enable-plugins \
  	--enable-lto \
- 	--with-libelf=$(TOPDIR)/staging_dir/host
 -- 
-2.25.1
+2.41.0
 
