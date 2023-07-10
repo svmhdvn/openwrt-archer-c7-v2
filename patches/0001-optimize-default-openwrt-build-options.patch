@@ -1,0 +1,211 @@
+From e12a5c188a930783da51d11cb948597912e90444 Mon Sep 17 00:00:00 2001
+From: Siva Mahadevan <me@svmhdvn.name>
+Date: Sun, 9 Jul 2023 23:22:49 -0400
+Subject: [PATCH] optimize default openwrt build options
+
+---
+ config/Config-build.in           | 14 +++++++++-----
+ config/Config-kernel.in          | 22 +++++++++++-----------
+ package/kernel/mac80211/Makefile |  2 +-
+ 3 files changed, 21 insertions(+), 17 deletions(-)
+
+diff --git a/config/Config-build.in b/config/Config-build.in
+index df2d910..b7c039a 100644
+--- a/config/Config-build.in
++++ b/config/Config-build.in
+@@ -146,6 +146,7 @@ menu "Global build settings"
+ 
+ 	config USE_GC_SECTIONS
+ 		bool
++		default y
+ 		prompt "Dead code and data elimination for all packages (EXPERIMENTAL)"
+ 		help
+ 		  Places functions and data items into its own sections to use the linker's
+@@ -154,6 +155,7 @@ menu "Global build settings"
+ 
+ 	config USE_LTO
+ 		bool
++		default y
+ 		prompt "Use the link-time optimizer for all packages (EXPERIMENTAL)"
+ 		help
+ 		  Adds LTO flags to the CFLAGS and LDFLAGS.
+@@ -209,6 +211,7 @@ menu "Global build settings"
+ 
+ 	config STRIP_KERNEL_EXPORTS
+ 		bool "Strip unnecessary exports from the kernel image"
++		default y
+ 		help
+ 		  Reduces kernel size by stripping unused kernel exports from the kernel
+ 		  image.  Note that this might make the kernel incompatible with any kernel
+@@ -216,6 +219,7 @@ menu "Global build settings"
+ 
+ 	config USE_MKLIBS
+ 		bool "Strip unnecessary functions from libraries"
++		default y
+ 		help
+ 		  Reduces libraries to only those functions that are necessary for using all
+ 		  selected packages (including those selected as <M>).  Note that this will
+@@ -236,7 +240,7 @@ menu "Global build settings"
+ 	choice
+ 		prompt "User space ASLR PIE compilation"
+ 		default PKG_ASLR_PIE_NONE if ((SMALL_FLASH || LOW_MEMORY_FOOTPRINT) && !SDK)
+-		default PKG_ASLR_PIE_REGULAR
++		default PKG_ASLR_PIE_ALL
+ 		help
+ 		  Add -fPIC to CFLAGS and -specs=hardened-build-ld to LDFLAGS.
+ 		  This enables package build as Position Independent Executables (PIE)
+@@ -265,7 +269,7 @@ menu "Global build settings"
+ 
+ 	choice
+ 		prompt "User space Stack-Smashing Protection"
+-		default PKG_CC_STACKPROTECTOR_REGULAR
++		default PKG_CC_STACKPROTECTOR_NONE
+ 		help
+ 		  Enable GCC Stack Smashing Protection (SSP) for userspace applications
+ 		config PKG_CC_STACKPROTECTOR_NONE
+@@ -278,7 +282,7 @@ menu "Global build settings"
+ 
+ 	choice
+ 		prompt "Kernel space Stack-Smashing Protection"
+-		default KERNEL_CC_STACKPROTECTOR_REGULAR
++		default KERNEL_CC_STACKPROTECTOR_NONE
+ 		help
+ 		  Enable GCC Stack-Smashing Protection (SSP) for the kernel
+ 		config KERNEL_CC_STACKPROTECTOR_NONE
+@@ -299,7 +303,7 @@ menu "Global build settings"
+ 
+ 	choice
+ 		prompt "Enable buffer-overflows detection (FORTIFY_SOURCE)"
+-		default PKG_FORTIFY_SOURCE_1
++		default PKG_FORTIFY_SOURCE_NONE
+ 		help
+ 		  Enable the _FORTIFY_SOURCE macro which introduces additional
+ 		  checks to detect buffer-overflows in the following standard library
+@@ -319,7 +323,7 @@ menu "Global build settings"
+ 
+ 	choice
+ 		prompt "Enable RELRO protection"
+-		default PKG_RELRO_FULL
++		default PKG_RELRO_NONE
+ 		help
+ 		  Enable a link-time protection known as RELRO (Relocation Read Only)
+ 		  which helps to protect from certain type of exploitation techniques
+diff --git a/config/Config-kernel.in b/config/Config-kernel.in
+index 32524f5..5332bf5 100644
+--- a/config/Config-kernel.in
++++ b/config/Config-kernel.in
+@@ -26,7 +26,7 @@ config KERNEL_PRINTK
+ 
+ config KERNEL_SWAP
+ 	bool "Support for paging of anonymous memory (swap)"
+-	default y if !SMALL_FLASH
++	default n
+ 
+ config KERNEL_PROC_STRIPPED
+ 	bool "Strip non-essential /proc functionality to reduce code size"
+@@ -271,7 +271,7 @@ endif
+ 
+ config KERNEL_KALLSYMS
+ 	bool "Compile the kernel with symbol table information"
+-	default y if !SMALL_FLASH
++	default n
+ 	help
+ 	  This will give you more information in stack traces from kernel oopses.
+ 
+@@ -355,7 +355,7 @@ config KERNEL_DEBUG_KERNEL
+ 
+ config KERNEL_DEBUG_INFO
+ 	bool "Compile the kernel with debug information"
+-	default y if !SMALL_FLASH
++	default n
+ 	select KERNEL_DEBUG_KERNEL
+ 	help
+ 	  This will compile your kernel and modules with debug information.
+@@ -435,7 +435,7 @@ config KERNEL_DYNAMIC_DEBUG
+ 
+ config KERNEL_EARLY_PRINTK
+ 	bool "Compile the kernel with early printk"
+-	default y if TARGET_bcm53xx
++	default n
+ 	depends on arm
+ 	select KERNEL_DEBUG_KERNEL
+ 	select KERNEL_DEBUG_LL if arm
+@@ -476,7 +476,7 @@ config KERNEL_BPF_KPROBE_OVERRIDE
+ 
+ config KERNEL_AIO
+ 	bool "Compile the kernel with asynchronous IO support"
+-	default y if !SMALL_FLASH
++	default n
+ 
+ config KERNEL_IO_URING
+ 	bool "Compile the kernel with io_uring support"
+@@ -519,7 +519,7 @@ config KERNEL_HUGETLB_PAGE
+ 
+ config KERNEL_MAGIC_SYSRQ
+ 	bool "Compile the kernel with SysRq support"
+-	default y
++	default n
+ 
+ config KERNEL_DEBUG_PINCTRL
+ 	bool "Compile the kernel with pinctrl debugging"
+@@ -535,7 +535,7 @@ config KERNEL_COREDUMP
+ config KERNEL_ELF_CORE
+ 	bool "Enable process core dump support"
+ 	select KERNEL_COREDUMP
+-	default y if !SMALL_FLASH
++	default n
+ 
+ config KERNEL_PROVE_LOCKING
+ 	bool "Enable kernel lock checking"
+@@ -611,7 +611,7 @@ config KERNEL_DEBUG_VM
+ 
+ config KERNEL_PRINTK_TIME
+ 	bool "Enable printk timestamps"
+-	default y
++	default n
+ 
+ config KERNEL_SLUB_DEBUG
+ 	bool
+@@ -645,7 +645,7 @@ config KERNEL_CRASH_DUMP
+ 	select KERNEL_PROC_VMCORE
+ 	select KERNEL_PROC_KCORE
+ 	bool "Enable support for kexec crashdump"
+-	default y
++	default n
+ 
+ config USE_RFKILL
+ 	bool "Enable rfkill support"
+@@ -995,7 +995,7 @@ config KERNEL_DEVPTS_MULTIPLE_INSTANCES
+ 
+ config KERNEL_POSIX_MQUEUE
+ 	bool "POSIX Message Queues"
+-	default y if !SMALL_FLASH
++	default n
+ 	help
+ 	  POSIX variant of message queues is a part of IPC. In POSIX message
+ 	  queues every message has a priority which decides about succession
+@@ -1261,7 +1261,7 @@ config KERNEL_SQUASHFS_XATTR
+ #
+ choice
+ 	prompt "Compiler optimization level"
+-	default KERNEL_CC_OPTIMIZE_FOR_SIZE if SMALL_FLASH
++	default KERNEL_CC_OPTIMIZE_FOR_PERFORMANCE
+ 
+ config KERNEL_CC_OPTIMIZE_FOR_PERFORMANCE
+ 	bool "Optimize for performance"
+diff --git a/package/kernel/mac80211/Makefile b/package/kernel/mac80211/Makefile
+index 248b48c..bcb9efa 100644
+--- a/package/kernel/mac80211/Makefile
++++ b/package/kernel/mac80211/Makefile
+@@ -151,7 +151,7 @@ define KernelPackage/mac80211/config
+ 
+ 	config PACKAGE_MAC80211_MESH
+ 		bool "Enable 802.11s mesh support"
+-		default y
++		default n
+ 
+   endif
+ endef
+-- 
+2.41.0
+
