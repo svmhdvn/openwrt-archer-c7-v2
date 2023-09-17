@@ -3,7 +3,7 @@
 set -e -x
 
 openwrt_url='https://git.openwrt.org/openwrt/openwrt.git'
-openwrt_tag='v23.05.0-rc2'
+openwrt_tag='v23.05.0-rc3'
 #openwrt_tag='origin/master'
 
 cpus=$(nproc)
@@ -23,8 +23,10 @@ git reset --hard "$openwrt_tag"
 git am $top/patches/*.patch
 ./scripts/feeds update -a
 ./scripts/feeds install -a
+
+make menuconfig
+
 make -j"$cpus" download
-make -j"$cpus" menuconfig
 make -j"$cpus" kernel_menuconfig CONFIG_TARGET=subtarget
 
 # set all kernel modules to be built-in
