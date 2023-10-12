@@ -3,7 +3,7 @@
 set -e -x
 
 openwrt_url='https://git.openwrt.org/openwrt/openwrt.git'
-openwrt_tag='v23.05.0-rc4'
+openwrt_tag='v23.05.0'
 #openwrt_tag='origin/master'
 
 cpus=$(nproc)
@@ -14,7 +14,9 @@ if [ ! -d "$top/openwrt" ]; then
 fi
 cd "$top/openwrt"
 
-git reset --hard "$openwrt_tag"
+git fetch --depth 1 origin tag "$openwrt_tag"
+git reset --hard HEAD
+git checkout "$openwrt_tag"
 
 # TODO we only need to pull if we are building origin/master
 #git pull origin master
