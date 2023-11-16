@@ -1,9 +1,9 @@
 #!/bin/sh
 
-set -e -x
+set -ex
 
 openwrt_url='https://git.openwrt.org/openwrt/openwrt.git'
-openwrt_tag='v23.05.0'
+openwrt_tag='v23.05.2'
 #openwrt_tag='origin/master'
 
 cpus=$(nproc)
